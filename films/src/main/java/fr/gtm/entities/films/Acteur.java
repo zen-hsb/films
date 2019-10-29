@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name="acteurs")
@@ -34,7 +35,7 @@ public class Acteur {
 	
 	
 	
-	@ManyToMany(mappedBy = "acteurs",cascade = CascadeType.ALL) //manytomany bidirectionnel
+	@ManyToMany(mappedBy = "acteurs",cascade = CascadeType.ALL, fetch = FetchType.EAGER) //manytomany bidirectionnel
 	private List<Film> films = new ArrayList<Film>();
 	
 	
@@ -76,6 +77,59 @@ public class Acteur {
 	
 	public void setFilms(List<Film> films) {
 		this.films = films;
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((civilite == null) ? 0 : civilite.hashCode());
+//		result = prime * result + ((dateDeces == null) ? 0 : dateDeces.hashCode());
+//		result = prime * result + ((dateNaissance == null) ? 0 : dateNaissance.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Acteur other = (Acteur) obj;
+		if (civilite == null) {
+			if (other.civilite != null)
+				return false;
+		} else if (!civilite.equals(other.civilite))
+			return false;
+//		if (dateDeces == null) {
+//			if (other.dateDeces != null)
+//				return false;
+//		} else if (!dateDeces.equals(other.dateDeces))
+//			return false;
+//		if (dateNaissance == null) {
+//			if (other.dateNaissance != null)
+//				return false;
+//		} else if (!dateNaissance.equals(other.dateNaissance))
+//			return false;
+		if (id != other.id)
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (prenom == null) {
+			if (other.prenom != null)
+				return false;
+		} else if (!prenom.equals(other.prenom))
+			return false;
+		return true;
 	}
 	
 	

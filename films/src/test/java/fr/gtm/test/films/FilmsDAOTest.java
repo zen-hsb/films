@@ -2,7 +2,7 @@ package fr.gtm.test.films;
 
 import static org.junit.Assert.*;
 
-
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
@@ -36,7 +36,7 @@ public class FilmsDAOTest {
 	
 	@Test
 	public void newDao() {
-		FilmDAO dao = new FilmDAO(emf);
+		FilmDAO dao = new FilmDAO(emf);			//ici, on va tester la classe FILM et pas la class ACTEUR : on teste une classe à la fois !
 		assertNotNull(dao);
 	}
 	
@@ -63,9 +63,23 @@ public class FilmsDAOTest {
 	public void testFilmActeurs() {
 		FilmDAO dao = new FilmDAO(emf);
 		Film film = dao.findById(1L);
-		assertTrue(film.getActeurs().isEmpty());
+		assertFalse(film.getActeurs().isEmpty());
 	}
 	
 	
-
+	@Test
+	public void create() {		//je vérifie que je crée bien un film avec un id différent
+		FilmDAO dao = new FilmDAO(emf);
+		Film film = new Film();
+		film.setTitre("Back to the future");
+		film.setDuree(110);
+		film.setDateSortie(LocalDate.of(1980, 01, 27));
+		
+		dao.create(film);
+//		assertNotEquals(0, film.getId());
+		assertEquals(17, film.getId());
+		
+	}
+		//Map<role, Acteur> roles = new HashMap<>();
+		//role.put(new Role("Clar kent
 }

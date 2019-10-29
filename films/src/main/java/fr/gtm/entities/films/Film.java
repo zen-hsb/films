@@ -48,7 +48,7 @@ public class Film {
 	private List<Acteur> acteurs = new ArrayList<Acteur>();
 	
 //	@Transient
-//	private Map<String, Acteur> roles = new	HashMap<String, Acteur>();//les roles font parti du film, et ils faut pouvoir relier les roles aux acteurs
+//	private Map<String, Acteur> roles = new	HashMap<String, Acteur>();	//les roles font parti du film, et il faut pouvoir relier les roles aux acteurs
 //	//on fait donc un map entre un role et un acteur.
 
 	public long getId() {
@@ -105,6 +105,56 @@ public class Film {
 
 	public void setActeurs(List<Acteur> acteurs) {
 		this.acteurs = acteurs;
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dateSortie == null) ? 0 : dateSortie.hashCode());
+		result = prime * result + duree;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((realisateur == null) ? 0 : realisateur.hashCode());
+//		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
+		result = prime * result + ((titre == null) ? 0 : titre.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Film other = (Film) obj;
+		if (dateSortie == null) {
+			if (other.dateSortie != null)
+				return false;
+		} else if (!dateSortie.equals(other.dateSortie))
+			return false;
+		if (duree != other.duree)
+			return false;
+		if (id != other.id)
+			return false;
+		if (realisateur == null) {
+			if (other.realisateur != null)
+				return false;
+		} else if (!realisateur.equals(other.realisateur))
+			return false;
+//		if (roles == null) {
+//			if (other.roles != null)
+//				return false;
+//		} else if (!roles.equals(other.roles))
+//			return false;
+		if (titre == null) {
+			if (other.titre != null)
+				return false;
+		} else if (!titre.equals(other.titre))
+			return false;
+		return true;
 	}
 	
 }
