@@ -126,7 +126,9 @@ public class Film {
 		this.roles = roles;
 	}
 	
-	
+	public void add(Role role,Acteur acteur) {
+		roles.put(role, acteur);
+	}
 	
 	
 //	
@@ -187,5 +189,8 @@ public class Film {
 			return false;
 		return true;
 	}
+
+
+
 	
 }

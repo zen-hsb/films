@@ -48,6 +48,16 @@ public class Acteur {
 	private List<Film> films = new ArrayList<Film>();
 	
 	
+	public Acteur() {}
+
+	
+	
+	public Acteur(String civilite, String nom, String prenom) {
+		this.civilite = civilite;
+		this.nom = nom;
+		this.prenom = prenom;
+	} 
+	
 	
 	public long getId() {
 		return id;
