@@ -35,8 +35,18 @@ public class Acteur {
 	
 	
 	
-	@ManyToMany(mappedBy = "acteurs",cascade = CascadeType.ALL, fetch = FetchType.EAGER) //manytomany bidirectionnel
+//	@ManyToMany(mappedBy = "acteurs",cascade = CascadeType.ALL, fetch = FetchType.EAGER) //manytomany bidirectionnel : MAPPAGE PAR LA PROPRIETE ACTEUR QU'IL Y A DANS "FILM". SANS Role
+//	private List<Film> films = new ArrayList<Film>();
+	
+	
+	
+	
+	@ManyToMany(fetch = FetchType.EAGER,targetEntity = Acteur.class)			//many to many bidirectionnel AVEC Map et AVEC Role
+	@JoinTable(name="film_acteur",
+		joinColumns = @JoinColumn(name="fk_acteur"),
+		inverseJoinColumns = @JoinColumn(name="fk_film"))
 	private List<Film> films = new ArrayList<Film>();
+	
 	
 	
 	public long getId() {

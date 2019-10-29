@@ -59,12 +59,12 @@ public class FilmsDAOTest {
 		assertFalse(films.isEmpty());
 	}
 	
-	@Test
-	public void testFilmActeurs() {
-		FilmDAO dao = new FilmDAO(emf);
-		Film film = dao.findById(1L);
-		assertFalse(film.getActeurs().isEmpty());
-	}
+//	@Test
+//	public void testFilmActeurs() {
+//		FilmDAO dao = new FilmDAO(emf);
+//		Film film = dao.findById(1L);
+//		assertFalse(film.getActeurs().isEmpty());
+//	}
 	
 	
 	@Test
@@ -80,6 +80,25 @@ public class FilmsDAOTest {
 		assertEquals(17, film.getId());
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public void testFilmsRoles() {
+		
+	}
 		//Map<role, Acteur> roles = new HashMap<>();
-		//role.put(new Role("Clar kent
+		//role.put(new Role("Clar kent"), new Acteur("M", "Michael J", "Fox")
+		//role.put(new Role("Clar kent"), new Acteur("M", "Michael J", "Fox")
+	
+		//film.setRole();
+	
+	
+	
+	
+	//Map<String, Acteur> roles = new HashMap<String, Acteur>();
 }

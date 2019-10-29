@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.relation.Role;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -41,16 +43,38 @@ public class Film {
 	
 //	@Transient
 	
+//	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)		//manytomany unidirectionnel
+//	@JoinTable(name = "film_acteur",					//il faut une table de jointure
+//			joinColumns=@JoinColumn(name="fk_film"),	//clé de jointure pour la classe film (colonne qui correspond à la classe film)
+//			inverseJoinColumns=@JoinColumn(name="fk_acteur"))	//clé de jointure pour la classe Acteur
+//	private List<Acteur> acteurs = new ArrayList<Acteur>();		//LISTE/COLLECTION D'ACTEURS
+	
+//	@Transient
+	
+	
+	
+	
+	
+	
+//	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)		//manytomany bidirectionnel avec MAP mais sans Role.
+//	@JoinTable(name = "film_acteur",					//il faut une table de jointure
+//			joinColumns=@JoinColumn(name="fk_film"),	//clé de jointure pour la classe film (colonne qui correspond à la classe film)
+//			inverseJoinColumns=@JoinColumn(name="fk_acteur"))
+//	@MapKeyColumn	
+//	private Map<String, Acteur> roles = new	HashMap<String, Acteur>();
+	
+	
+	
+	
+	
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)		//manytomany unidirectionnel
 	@JoinTable(name = "film_acteur",					//il faut une table de jointure
 			joinColumns=@JoinColumn(name="fk_film"),	//clé de jointure pour la classe film (colonne qui correspond à la classe film)
-			inverseJoinColumns=@JoinColumn(name="fk_acteur"))	//clé de jointure pour la classe Acteur
-	private List<Acteur> acteurs = new ArrayList<Acteur>();
-	
-//	@Transient
-//	private Map<String, Acteur> roles = new	HashMap<String, Acteur>();	//les roles font parti du film, et il faut pouvoir relier les roles aux acteurs
-//	//on fait donc un map entre un role et un acteur.
-
+			inverseJoinColumns=@JoinColumn(name="fk_acteur"))
+	private Map<Role, Acteur> roles = new	HashMap<Role, Acteur>();	//les roles font parti du film, et il faut pouvoir relier les roles aux acteurs
+	//on fait donc un map entre un role et un acteur. 
+																					//ICI : ON EST EN EMBEDDABLE MANY TO MANY MAP : ON AJOUTE DONC LA CLASSE "ROLE" : on peut ainsi rajouter des propriétés et des méthode (au lieu d'avoir juste "String")
 	public long getId() {
 		return id;
 	}
@@ -90,22 +114,29 @@ public class Film {
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
+	
+	
+	
 
-//	public Map<String, Acteur> getRoles() {
-//		return roles;
+	public Map<Role, Acteur> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Map<Role, Acteur> roles) {
+		this.roles = roles;
+	}
+	
+	
+	
+	
+//	
+//	public List<Acteur> getActeurs() {
+//		return acteurs;
 //	}
 //
-//	public void setRoles(Map<String, Acteur> roles) {
-//		this.roles = roles;
+//	public void setActeurs(List<Acteur> acteurs) {
+//		this.acteurs = acteurs;
 //	}
-	
-	public List<Acteur> getActeurs() {
-		return acteurs;
-	}
-
-	public void setActeurs(List<Acteur> acteurs) {
-		this.acteurs = acteurs;
-	}
 	
 	
 	@Override
